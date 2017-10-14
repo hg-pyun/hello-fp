@@ -217,3 +217,9 @@ const b = createEldiv('currying2 test'); // <div>currying2 test</div>
 const c = createEl('p')('chain'); // <p>chain</p>
  ```
 
+# 참고자료
+ - [What is Functional Programming?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
+ - [What is a Pure Function?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976)
+ - [What is Function Composition?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0)
+ - [The Dao of Immutability.](https://medium.com/javascript-scene/the-dao-of-immutability-9f91a70c88cd)
+ - [10 Tips for Better Redux Architecture](https://medium.com/javascript-scene/10-tips-for-better-redux-architecture-69250425af44)
