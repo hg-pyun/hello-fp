@@ -158,5 +158,14 @@ reduce 함수에서 prev, cur 은 그냥 쉽게 생각해 이렇게 생각하면
     <th>9</th>
     <th>45</th>
   </tr>
+  <tr>
+    <th>9</th>
+    <th>45</th>
+    <th>10</th>
+    <th>55</th>
+  </tr>
+
+  위와 같이 reduce 함수가 작동하게 된다.
+
   
 </table>
