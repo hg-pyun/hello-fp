@@ -11,6 +11,7 @@
 - 익명 함수(anonymous function)
 - 람다 (lambda)
 - 고계 함수(higher-order function)
+- 재귀 함수 (Recursive)
 - Curry
 - Monad
 
