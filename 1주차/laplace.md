@@ -44,6 +44,7 @@ const listItems = numbers.map((number) =>
     <li>{number}</li>
 );
 ```
+```
 #### Filter
 // 과목 이름, 점수 데이터
 let subjects =
