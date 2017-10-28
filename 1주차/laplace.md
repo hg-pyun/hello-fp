@@ -44,12 +44,25 @@ const listItems = numbers.map((number) =>
     <li>{number}</li>
 );
 ```
-
+```
 #### Filter
-```javascript
-// functional
-let funcResult = subjects.map(makeUpperCase);   // Array.prototype.map.call(subjects, makeUpperCase);
-console.log(funcResult);  // [ 'MATH', 'ENGLISH', 'KOREAN' ]
+// 과목 이름, 점수 데이터
+let subjects =
+    [{
+        name: 'math',
+        score: 100,
+    }, {
+        name: 'english',
+        score: 85
+    }, {
+        name: 'korean',
+        score: 95
+    }];
+
+// 90점 이상인지 체크
+function is90Over(subject) {
+    return subject.score > 90;
+}
 
 // loop
 let result = [];
