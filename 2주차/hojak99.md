@@ -1,6 +1,6 @@
 ## RxJS 란?
 
-RxJs 에 대한 정의를 알아가기 전, 알고 넘어가야 할 것들이 있다. <b>Reactive> Programming</b 이다. 왜냐하면 바로 이 Reactive Programming 으로 만든 라이브러리가 RxJs 이기 때문이다.
+RxJs 에 대한 정의를 알아가기 전, 알고 넘어가야 할 것들이 있다. <b>Reactive> Programming</b> 이다. 왜냐하면 바로 이 Reactive Programming 으로 만든 라이브러리가 RxJs 이기 때문이다.
 
 그렇다면 Reactive Programming 의 정의란 무엇일까?
 <pre><code>
