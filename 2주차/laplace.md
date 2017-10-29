@@ -65,7 +65,6 @@ $ npm install rxjs-es
 $ npm install rxjs
 ```
 그리고 다음과 같이 사용한다.
-```
 ```javascript
 import Rx from 'rxjs/Rx';
 
@@ -202,3 +201,5 @@ Rx.Observable.fromEvent(button, 'click')
 - [RxJS](http://reactivex.io/rxjs/)
 - [What is Reactive Programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754 )
 - [Reactive Programming](http://blog.naver.com/PostView.nhn?blogId=jdub7138&logNo=220983291803&parentCategoryNo=58&categoryNo=&viewDate=&isShowPopularPosts=true&from=search)
+- [Learn-RxJS](https://www.learnrxjs.io/operators/creation/of.html)
+- [Daum RxJS 적용 후기](http://tech.kakao.com/2017/01/09/daummovie-rxjs/)
