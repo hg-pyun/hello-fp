@@ -74,4 +74,11 @@ Rx.Observable.from([1, 2, 3, 4, 5])
     }).map(function (num) {
         return num * num;
     }).subscribe(observer);
+
+/*
+    onNext: 1
+    onNext: 9
+    onNext: 25
+    onCompleted
+*/
 </code></pre>
