@@ -52,7 +52,7 @@ ReactiveX의 약자로서 FRP의 원리를 활용해서 비동기적인 이벤�
 ```
 Rx의 핵심은 모든것이 Dada Stream이다.
 ```
-## RxJs란?
+# RxJS란?
 RxJS는 이벤트 스트림과 데이터를 쉽게 만들고 다룰 수 있도록 도우는 Library.
 복잡하지만 가독성이 좋은 비동기적 코드를 더 쉽게 작성할 수 있도록 도와줌.
 
@@ -64,15 +64,13 @@ $ npm install rxjs-es
 // es5
 $ npm install rxjs
 ```
-
-## How to Use
-
+그리고 다음과 같이 사용한다.
+```
 ```javascript
 import Rx from 'rxjs/Rx';
 
 Rx.Observable.of(1,2,3)
 ```
-
 ## Declaration
 ### Converting
 ```javascript
@@ -112,7 +110,8 @@ var myObservable = Rx.Observable.create(observer => {
 });
 myObservable.subscribe(value => console.log(value));
 ```
-## Example
+## Simple Example
+### Observer
 보통 이벤트 리스너는 다음과 같이 선언함.
 ```javascript
 var button = document.querySelector('button');
@@ -124,6 +123,70 @@ var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
   .subscribe(() => console.log('Clicked!'));
 ```
+
+### Purity
+일반적으로 변수를 사용할 때 다음과 같이 사용한다.
+```javascript
+var count = 0;
+var button = document.querySelector('button');
+button.addEventListener('click', () => console.log(`Clicked ${++count} times`));
+```
+RxJS는 다음과 같이 독립적인 변수를 사용할 수 있다.
+```javascript
+var button = document.querySelector('button');
+Rx.Observable.fromEvent(button, 'click')
+  .scan(count => count + 1, 0)
+  .subscribe(count => console.log(`Clicked ${count} times`));
+```
+### Flow
+throttle을 구현할때 보통 다음과 같이 사용한다.
+```
+var count = 0;
+var rate = 1000;
+var lastClick = Date.now() - rate;
+var button = document.querySelector('button');
+button.addEventListener('click', () => {
+  if (Date.now() - lastClick >= rate) {
+    console.log(`Clicked ${++count} times`);
+    lastClick = Date.now();
+  }
+});
+```
+RxJS에서는 다양한 범위 함수를 지원한다. 이를 flow control operator라고 한다.
+```javascript
+var button = document.querySelector('button');
+Rx.Observable.fromEvent(button, 'click')
+  .throttleTime(1000)
+  .scan(count => count + 1, 0)
+  .subscribe(count => console.log(`Clicked ${count} times`));
+```
+filter, delay, debounceTime, take, takeUntil, distinct, distinctUntilChanged 등이 있다.
+
+### Values
+버튼을 누를 때 마다 X좌표값을 더해서 출력하는 함수를 작성한다고 하자. 아마 다음과 같을 것이다.
+```javascript
+var count = 0;
+var rate = 1000;
+var lastClick = Date.now() - rate;
+var button = document.querySelector('button');
+button.addEventListener('click', (event) => {
+  if (Date.now() - lastClick >= rate) {
+    count += event.clientX;
+    console.log(count)
+    lastClick = Date.now();
+  }
+});
+```
+RxJS에서는 가공된 값을 다음과 같이 연결한다.
+```javascript
+var button = document.querySelector('button');
+Rx.Observable.fromEvent(button, 'click')
+  .throttleTime(1000)
+  .map(event => event.clientX)
+  .scan((count, clientX) => count + clientX, 0)
+  .subscribe(count => console.log(count));
+```
+
 ## Reference
 - [RxJS](http://reactivex.io/rxjs/)
 - [What is Reactive Programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754 )
