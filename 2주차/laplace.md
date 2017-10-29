@@ -73,7 +73,57 @@ import Rx from 'rxjs/Rx';
 Rx.Observable.of(1,2,3)
 ```
 
+## Declaration
+### Converting
+```javascript
+// From one or multiple values
+Rx.Observable.of('foo', 'bar');
 
+// From array of values
+Rx.Observable.from([1,2,3]);
+
+// From an event
+Rx.Observable.fromEvent(document.querySelector('button'), 'click');
+
+// From a Promise
+Rx.Observable.fromPromise(fetch('/users'));
+
+// From a callback (last argument is a callback)
+// fs.exists = (path, cb(exists))
+var exists = Rx.Observable.bindCallback(fs.exists);
+exists('file.txt').subscribe(exists => console.log('Does file exist?', exists));
+
+// From a callback (last argument is a callback)
+// fs.rename = (pathA, pathB, cb(err, result))
+var rename = Rx.Observable.bindNodeCallback(fs.rename);
+rename('file.txt', 'else.txt').subscribe(() => console.log('Renamed!'));
+```
+### Creating
+```javascript
+// Externally
+var myObservable = new Rx.Subject();
+myObservable.subscribe(value => console.log(value));
+myObservable.next('foo');
+
+// Internally
+var myObservable = Rx.Observable.create(observer => {
+  observer.next('foo');
+  setTimeout(() => observer.next('bar'), 1000);
+});
+myObservable.subscribe(value => console.log(value));
+```
+## Example
+보통 이벤트 리스너는 다음과 같이 선언함.
+```javascript
+var button = document.querySelector('button');
+button.addEventListener('click', () => console.log('Clicked!'))
+```
+이를 RxJS로 표현하면 다음과 같다.
+```javascript
+var button = document.querySelector('button');
+Rx.Observable.fromEvent(button, 'click')
+  .subscribe(() => console.log('Clicked!'));
+```
 ## Reference
 - [RxJS](http://reactivex.io/rxjs/)
 - [What is Reactive Programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754 )
