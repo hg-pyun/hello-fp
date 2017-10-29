@@ -123,7 +123,18 @@ var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
   .subscribe(() => console.log('Clicked!'));
 ```
+또 다음과 같이 사용할 수 있다.
+```javascript
+var foo = Rx.Observable.create(function (observer) {
+  observer.next(42);
+  observer.next(100);
+  observer.next(200); 
+});
 
+foo.subscribe(function (x) {
+  console.log(x);
+});
+```
 ### Purity
 일반적으로 변수를 사용할 때 다음과 같이 사용한다.
 ```javascript
