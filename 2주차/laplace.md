@@ -7,7 +7,7 @@ Reactive programming is programming with asynchronous data streams.
 ```
 한마디로 비동기적인 작업을 데이터의 흐름을 처리하는 프로그래밍을 의미한다.
 
-## [Reactive Programming](http://blog.naver.com/PostView.nhn?blogId=jdub7138&logNo=220983291803&parentCategoryNo=58&categoryNo=&viewDate=&isShowPopularPosts=true&from=search) 블로그 인용
+## [Reactive Programming](http://blog.naver.com/PostView.nhn?blogId=jdub7138&logNo=220983291803&parentCategoryNo=58&categoryNo=&viewDate=&isShowPopularPosts=true&from=search) Concept
 ### Real Time
 사용자 입장에서 보자면 Reactive Programming이란 실시간으로 반응을 하는 프로그래밍을 말합니다. 
 이는 '명령형' 프로그래밍을 뜻하는 Imperative Programming과 대비되는 개념입니다.
