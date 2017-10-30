@@ -33,21 +33,20 @@
   > 디바운싱(Debouncing)을 이용한 공유 상태 경쟁조건(race condition) 해결 코드
   ```js
   function getSearchResult(){
-    let prevTime = new Date();
+    let timeout = null;
     return function (e) {
-      let nowTime = new Date();
-      if(nowTime - prevTime > 200){
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeout = setTimeout(() => {
         axios.get(searchURL)
           .then((res) => {
             searchResult = res.data;
           })
-      } else {
-        prevTime = nowTime;
-      }
+      }, delay);
     }
   }
   let searchResult;
-  
   input.addEventListener('keyup', getSearchResult())
   ```
   - 공유상태(Shared State)와 관련된 문제 중 함수 호출 순서에 따라 결과 값이 달라진다.
