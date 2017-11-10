@@ -107,7 +107,9 @@ Ramda 의 주요 특징들은 다음과 같다.
  - Ramda 함수의 매개변수는 커링(currying)에 편리하도록 배열되어 만들어진다. 일반적으로 조작할 데이터는 마지막에 제공된다.
 
 
- ## Ramda.js 를 이용한 커링
+ ## Ramda.js 예제
+
+ ### 커링
 위에 내용에서 bind() 함수를 이용해 커링을 한다고 했다. Ramda 에서도 커링을 할 수 있는 함수가 존재한다. 바로 <code>R.curry()</code>라는 함수이다.
 
 <pre><code>
@@ -129,4 +131,21 @@ var temp_2 = temp_1('gwang');
 temp_2('good');                 // 'James gwang good'
 temp_2('nice');                 // 'James gwang nice'
 </code></pre>
+
+위의 예제에서는 개발자가 직접 정의한 함수에 R.curry를 이용해 커링 할 수 있도록 하지만, Ramda 에서 제공하는 함수에서도 커링이 가능하다.   
+
+다음 예제에서 그 함수에 대해 알아보자.
+
+<pre><code>
+var add = function(a, b) {return a+ b;};
+var numbers = [1, 2, 3, 4, 5];
+
+var sum = numbers.reduce(add, 0);           // JS 내장 함수인 reduce : 15
+var sumRamda = R.reduce(add, 0, numbers);   // Ramda 에서 제공하는 reduce : 15
+
+// 여기서 R.reduce 는 커링이 되있는 함수이기 때문에 다음과 같이 코드를 작성할 수도 있다.
+var total = R.reduce(add ,0);               // returs a funtion
+var sumRamdaTest = total(numbers);          // 15
+</code></pre>
+---
  
