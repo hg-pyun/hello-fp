@@ -1,7 +1,7 @@
 # 3주차
 Rambda.js에 대해 기본적인 부분을 공부해 보도록 하자.
 아래 내용들은 함수형 프로그래밍에 대해 알고있다는 가정하에 설명하고 있으므로, 기본 지식이 필요한 사람들은 다음 포스팅을 참고 한 후 진행하도록 하자.
-
+- [함수형 프로그래밍이란 무엇인가?](https://medium.com/@jooyunghan/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-fab4e960d263)
 - [Functional Programming in Javascript](http://dev-momo.tistory.com/entry/Functional-Programming-in-Javascript)
 - [currying in javascirpt](http://dev-momo.tistory.com/entry/Currying-in-Javascript)
 
