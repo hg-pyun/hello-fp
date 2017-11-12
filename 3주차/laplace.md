@@ -1,5 +1,9 @@
 # 3주차
 Rambda.js에 대해 기본적인 부분을 공부해 보도록 하자.
+아래 내용들은 함수형 프로그래밍에 대해 알고있다는 가정하에 설명하고 있으므로, 기본 지식이 필요한 사람들은 다음 포스팅을 참고 한 후 진행하도록 하자.
+
+- [Functional Programming in Javascript](http://dev-momo.tistory.com/entry/Functional-Programming-in-Javascript)
+- [currying in javascirpt](http://dev-momo.tistory.com/entry/Currying-in-Javascript)
 
 ## 특징
 - Rambda는 pure function style을 강조한다. 따라서 Imutablity 와 side-effect free는 이 라이브러리의 핵심 철학이다.
@@ -137,6 +141,29 @@ R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
 ## Examples
 몇가지 예를 더 보도록 하자.
 
+### Pick values a from list by indexes
+배열에서 특정 인덱스의 값들을 뽑아 새로운 배열을 만드는 함수를 만들어 보도록 하자.
+```javascript
+// pure script
+var pickIndexes = function (indexArray, array) {
+    var result = [];
+
+    for(var i=0; i<indexArray.length; i++){
+        result.push(array[indexArray[i]]);
+    }
+
+    return result;
+};
+
+pickIndexes([0, 2], ['a', 'b', 'c']); // => ['a', 'c']
+```
+Rambda를 사용하면 다음과 같이 합성하여 만들 수 있다.
+```javascript
+// :: [Number] -> [a] -> [a]
+var pickIndexes = R.compose(R.values, R.pickAll);
+pickIndexes([0, 2], ['a', 'b', 'c']); // => ['a', 'c']
+```
+
 ### Get an object's method names
 object에서 function을 value로 가지고 있는 key값을 추출하는 함수를 만들어 보도록 하자.
 ```javascript
@@ -214,3 +241,19 @@ const input = { firstName: 'Elisia', age: 22, type: 'human' }
 renameKeys({ firstName: 'name', type: 'kind', foo: 'bar' })(input)
 //=> { name: 'Elisia', age: 22, kind: 'human' }
 ```
+여담으로 이런 함수들은 서버에서 받아온 값을 클라이언트에서 입맛대로 키값을 바꾸기 위해 활용 할 수 있다.
+
+### Rename keys of an object by a function
+이런 식으로 활용이 가능하다.
+```javascript
+const renameBy = R.curry((fn, obj) => R.pipe(R.toPairs, R.map(R.adjust(fn, 0)), R.fromPairs)(obj));
+// usage: renameBy(R.concat('a'), { A: 1, B: 2, C: 3 })
+// -> { aA: 1, aB: 2, aC: 3 }
+```
+더 많은 활용법이 궁금한 사람은 [Rambda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)을 참고하도록 하자.
+
+## Reference
+- [Rambda.js](http://ramdajs.com/)
+- [Favoring Curry](http://fr.umio.us/favoring-curry/)
+- [Rambda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)
+- [javascript에서의 currying](http://shiren.github.io/2015-08-03-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%90%EC%84%9C%EC%9D%98-%EC%BB%A4%EB%A7%81/)
