@@ -88,7 +88,7 @@ var yellGreeting = R.compose(R.toUpper, classyGreeting);
 yellGreeting('James', 'Bond'); //=> "THE NAME'S BOND, JAMES BOND"
 ```
 여기서 주목할 부분은 compose method이다. ```R.compose```함수는 오른쪽에서 왼쪽으로 함수를 합성하는 역할을 한다. 가장 오른쪽 함수는 인자가 몇개여도 상관없지만, 그 외 함수들은 단항이어야 한다.
-단, compose된 함수는 자동적으로 curried되지 않으니 주의하도록 하자. <br/>
+단, compose된 함수는 자동적으로 curried되지 않으니 주의하도록 하자. (비슷한 함수로 ```R.pipe```도 있다.)<br/>
 다음으로 인자로 사용된 toUpper함수를 보도록 하자. ```R.toUpper```는 함수명으로 보건대 소문자를 대문자로 바꿔주는 역할을 하는 것 같다. 실제 구현을 보면 다음과 같다.
 
 ```javascript
@@ -133,3 +133,84 @@ sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
 R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
 ```
 이처럼 Rambda에서는 여러 함수를 조합하여 새로운 함수를 만들어 낼 수 있다. 또 내부 구현에서도 기존 Rambda 함수들을 이용하여 구현해 둔게 대부분이었으니, 어떻게 활용하는가에 따라 코드 몇줄 또는 함수 몇개로 원하는 결과를 얻을 수 있는 함수를 만들어낼 수 있을 것이다.
+
+## Examples
+몇가지 예를 더 보도록 하자.
+
+### Get an object's method names
+object에서 function을 value로 가지고 있는 key값을 추출하는 함수를 만들어 보도록 하자.
+```javascript
+// pure script
+var methodNames = function(obj){
+    var result = [];
+    for(var key in obj){
+        if(typeof obj[key] === "function"){
+            result.push(key);
+        }
+    }
+
+    return result;
+};
+
+var obj = {
+    foo: true,
+    bar: function() {},
+    baz: function() {},
+};
+
+methodNames(obj); // => ['bar', 'baz']
+```
+Rambda에서는 is, keys, pickby, compose를 사용하면 쉽게 만들 수 있다.
+
+#### R.is
+유효성 검사를 위해 사용한다.
+```javascript
+R.is(Object, {}); //=> true
+R.is(Number, 1); //=> true
+R.is(Object, 1); //=> false
+R.is(String, 's'); //=> true
+R.is(String, new String('')); //=> true
+R.is(Object, new String('')); //=> true
+R.is(Object, 's'); //=> false
+R.is(Number, {}); //=> false
+```
+#### R.keys
+key값을 추출해준다.
+```javascript
+R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
+```
+#### R.pickBy
+object에서 조건식을 만족하는 값들만 추출 한다. 
+```javascript
+var isUpperCase = (val, key) => key.toUpperCase() === key;
+R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
+```
+#### methodNames
+```javascript
+//  methodNames :: Object -> [String]
+var methodNames = R.compose(R.keys, R.pickBy(R.is(Function)));
+
+var obj = {
+  foo: true,
+  bar: function() {},
+  baz: function() {},
+};
+
+methodNames(obj); // => ['bar', 'baz']
+```
+
+### Rename keys
+다음 함수는 인자로 들어온 object의 key를 바꾸는 함수이다.
+```javascript
+const renameKeys = R.curry((keysMap, obj) =>
+  R.reduce((acc, key) => R.assoc(keysMap[key] || key, obj[key], acc), {}, R.keys(obj))
+);
+```
+
+renameKeys의 첫번째 인자로 바꿀 key들을 매칭하고, 두번째 인자로 바꾸고자 하는 object를 전달한다.
+```javascript
+const input = { firstName: 'Elisia', age: 22, type: 'human' }
+
+renameKeys({ firstName: 'name', type: 'kind', foo: 'bar' })(input)
+//=> { name: 'Elisia', age: 22, kind: 'human' }
+```
