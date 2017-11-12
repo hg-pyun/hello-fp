@@ -4,7 +4,7 @@
 
 #### Advantage
 - 부작용(Side Effect)의 최소화
-- 병렬프로그래밍에 강
+- 병렬프로그래밍에 강함
 
 #### Usage
 - 순수 함수(pure function)
