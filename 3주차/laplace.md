@@ -1,5 +1,5 @@
 # 3주차
-Rambda.js에 대해 기본적인 부분을 공부해 보도록 하자.
+Ramda.js에 대해 기본적인 부분을 공부해 보도록 하자.
 아래 내용들은 함수형 프로그래밍에 대해 알고있다는 가정하에 설명하고 있으므로, 기본 지식이 필요한 사람들은 다음 포스팅을 참고하면 도움이 될 것이다.
 - [함수형 프로그래밍이란 무엇인가?](https://medium.com/@jooyunghan/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-fab4e960d263)
 - [람다 대수](https://ko.wikipedia.org/wiki/%EB%9E%8C%EB%8B%A4_%EB%8C%80%EC%88%98)
@@ -7,9 +7,9 @@ Rambda.js에 대해 기본적인 부분을 공부해 보도록 하자.
 - [Currying in Javascirpt](http://dev-momo.tistory.com/entry/Currying-in-Javascript)
 
 ## 특징
-- Rambda는 pure function style을 강조한다. 따라서 Imutablity 와 side-effect free는 이 라이브러리의 핵심 철학이다.
-- Rambda 함수들은 자동 커리된다.
-- Rambda 함수의 매개 변수는 커링 (currying)에 편리하도록 배열된다. 조작 할 데이터는 일반적으로 마지막에 제공된다.
+- Ramda는 pure function style을 강조한다. 따라서 Imutablity 와 side-effect free는 이 라이브러리의 핵심 철학이다.
+- Ramda 함수들은 자동 커리된다.
+- Ramda 함수의 매개 변수는 커링 (currying)에 편리하도록 배열된다. 조작 할 데이터는 일반적으로 마지막에 제공된다.
 
 ## Installation
 ```javascript
@@ -24,7 +24,7 @@ To use directly in the browser:
 ```
 
 ## Curry
-우선 Rambda의 curry에 대해 간단히 알아보도록 하자. formatName1이란 함수에서는 lastName을 고정하여 반복하고 사용하고 싶다. 하지만 vanilla를 사용해서 다음과 같이 표현할 경우 undefined가 출력된다.
+우선 Ramda의 curry에 대해 간단히 알아보도록 하자. formatName1이란 함수에서는 lastName을 고정하여 반복하고 사용하고 싶다. 하지만 vanilla를 사용해서 다음과 같이 표현할 경우 undefined가 출력된다.
 ```javascript
 // uncurried version
 var formatName1 = function(first, middle, last) {
@@ -37,7 +37,7 @@ formatName1('John', 'Paul');
 //=> 'John Paul undefined');
 ```
 따라서 curry를 사용해서 인자를 분해할 수 있는데,
-Rambda를 사용할 경우 다음과 같이 사용이 가능하다.
+Ramda를 사용할 경우 다음과 같이 사용이 가능하다.
 ```javascript
 // curried version
 var formatNames2 = R.curry(function(first, middle, last) {
@@ -73,11 +73,11 @@ var total = function(list) {
 };
 var sum = total(numbers); //=> 15
 ```
-이번엔 Rambda로 표현해보도록 하자. 거의 비슷하다.
+이번엔 Ramda로 표현해보도록 하자. 거의 비슷하다.
 ```javascript
 var sum = R.reduce(add, 0, numbers); //=> 15
 ```
-하지만 vanilla와 다른 점이 있다. Rambda의 reduce는 curried function이기 때문에 다음 과 같이 활용이 가능하다.
+하지만 vanilla와 다른 점이 있다. Ramda의 reduce는 curried function이기 때문에 다음 과 같이 활용이 가능하다.
 ```
 // In Ramda:
 var total = R.reduce(add, 0);  // returns a function
@@ -85,7 +85,7 @@ var sum = total(numbers); //=> 15
 ```
 
 ## Compose
-Rambda를 사용하면 함수들을 합성해서 내게 필요한 함수들을 쉽게 만들어 낼 수 있다.
+Ramda를 사용하면 함수들을 합성해서 내게 필요한 함수들을 쉽게 만들어 낼 수 있다.
 아래 함수를 보도록 하자. ```yellGreeting```함수는 ```classyGreeting``` 함수의 인자들을 대문자로 바꿔주는 함수이다.
 ```javascript
 var classyGreeting = (firstName, lastName) => "The name's " + lastName + ", " + firstName + " " + lastName
@@ -137,7 +137,7 @@ sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
 ```
 R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
 ```
-이처럼 Rambda에서는 여러 함수를 조합하여 새로운 함수를 만들어 낼 수 있다.(이는 FP의 특성이다. Rambda는 이 특성을 잘 녹여내고 있다.) 또 내부 구현에서도 기존 Rambda 함수들을 이용하여 구현해 둔게 대부분이었으니, 어떻게 활용하는가에 따라 코드 몇줄 또는 함수 몇개로 원하는 결과를 얻을 수 있는 함수를 만들어낼 수 있을 것이다.
+이처럼 Ramda에서는 여러 함수를 조합하여 새로운 함수를 만들어 낼 수 있다.(이는 FP의 특성이다. Ramda는 이 특성을 잘 녹여내고 있다.) 또 내부 구현에서도 기존 Ramda 함수들을 이용하여 구현해 둔게 대부분이었으니, 어떻게 활용하는가에 따라 코드 몇줄 또는 함수 몇개로 원하는 결과를 얻을 수 있는 함수를 만들어낼 수 있을 것이다.
 
 ## Examples
 몇가지 예를 더 보도록 하자.
@@ -158,7 +158,7 @@ var pickIndexes = function (indexArray, array) {
 
 pickIndexes([0, 2], ['a', 'b', 'c']); // => ['a', 'c']
 ```
-Rambda를 사용하면 다음과 같이 합성하여 만들 수 있다.
+Ramda를 사용하면 다음과 같이 합성하여 만들 수 있다.
 ```javascript
 // :: [Number] -> [a] -> [a]
 var pickIndexes = R.compose(R.values, R.pickAll);
@@ -188,7 +188,7 @@ var obj = {
 
 methodNames(obj); // => ['bar', 'baz']
 ```
-Rambda에서는 is, keys, pickby, compose를 사용하면 쉽게 만들 수 있다.
+Ramda에서는 is, keys, pickby, compose를 사용하면 쉽게 만들 수 있다.
 
 #### R.is
 유효성 검사를 위해 사용한다.
@@ -251,10 +251,10 @@ const renameBy = R.curry((fn, obj) => R.pipe(R.toPairs, R.map(R.adjust(fn, 0)), 
 // usage: renameBy(R.concat('a'), { A: 1, B: 2, C: 3 })
 // -> { aA: 1, aB: 2, aC: 3 }
 ```
-더 많은 활용법이 궁금한 사람은 [Rambda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)을 참고하도록 하자.
+더 많은 활용법이 궁금한 사람은 [Ramda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)을 참고하도록 하자.
 
 ## Reference
-- [Rambda.js](http://ramdajs.com/)
+- [Ramda.js](http://ramdajs.com/)
 - [Favoring Curry](http://fr.umio.us/favoring-curry/)
-- [Rambda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)
+- [Ramda Cookbook](https://github.com/ramda/ramda/wiki/Cookbook#pick-values-a-from-list-by-indexes)
 - [javascript에서의 currying](http://shiren.github.io/2015-08-03-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%90%EC%84%9C%EC%9D%98-%EC%BB%A4%EB%A7%81/)
