@@ -84,7 +84,7 @@ _.extend = function(obj) {
   });
   return obj;
 };
-
+```
 ### 1.8.0
 ```javascript
 _.extend = createAssigner(_.allKeys);
