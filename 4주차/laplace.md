@@ -70,7 +70,9 @@ _.clone = function(obj) {
   return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
 };
 ```
-extend method에서 _.rest가 빠짐```
+extend method에서 _.rest가 빠짐
+
+```javascript
 // Extend a given object with all the properties in passed-in object(s).
 _.extend = function(obj) {
   each(slice.call(arguments, 1), function(source) {
@@ -82,14 +84,13 @@ _.extend = function(obj) {
   });
   return obj;
 };
-```
 
 ### 1.8.0
-```
+```javascript
 _.extend = createAssigner(_.allKeys);
 ```
 object assign 역할 internal 함수가 생김
-```
+```javascript
 // An internal function for creating assigner functions.
 var createAssigner = function(keysFunc, undefinedOnly) {
   return function(obj) {
