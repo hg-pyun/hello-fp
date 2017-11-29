@@ -40,6 +40,12 @@ moves.subscribe(position);
 position.value // returns the current position of the mouse
 </code></pre>
 
+위 예제에서는 하나의 이벤트 흐름인 moves라는 observable을 가지고 있습니다. 사용자가 매번 마우스를 움직일 때마다, observable은 이벤트를 발산(emit)시킵니다. 우리는 상태값인 position subject를 생성하여 moves observable을 사용합니다. position값의 속성은 마우스의 현재 위치를 반환합니다. 이 예제는 이벤트와 상태가 무엇인지 묘사해줄 뿐 아니라 상태는 종종 이벤트의 순차적인 나열에서 생성된다는 것을 보여줍니다.
+
+
+
+
+
 ### Cold Observalble
 * 일반적은 Observer 형태를 말함
 * 누가 구독해주지 않으면 데이터를 배출 하지 않는다.
