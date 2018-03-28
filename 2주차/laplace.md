@@ -5,7 +5,7 @@ RxJs에서 Rx가 의미하는건 ReactiveX 이다. 그렇다면 Reactive하다�
 ```
 Reactive programming is programming with asynchronous data streams.
 ```
-한마디로 비동기적인 작업을 데이터의 흐름을 처리하는 프로그래밍을 의미한다.
+한마디로 비동기적인 작업을 데이터의 흐름 처리하는 프로그래밍을 의미한다.
 
 ## [Reactive Programming](http://blog.naver.com/PostView.nhn?blogId=jdub7138&logNo=220983291803&parentCategoryNo=58&categoryNo=&viewDate=&isShowPopularPosts=true&from=search) Concept
 ### Real Time
